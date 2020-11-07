@@ -20,7 +20,7 @@ def get_config():
     parser.add_argument('--lr_g', type=float, default=0.0025)
     parser.add_argument('--lr_d', type=float, default=0.00001)
     parser.add_argument('--beta1', type=float, default=0.5)
-    parser.add_argument('--beta2', type=float, default=0.5)
+    parser.add_argument('--beta2', type=float, default=0.999)
     parser.add_argument('--checkpoint_path', type=str, default='')
 
     # model
