@@ -1,8 +1,10 @@
 import torch
 
-import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.gridspec as gridspec
+import scipy.io as io
+import scipy.ndimage as nd
+import numpy as np
 
 
 def sample_z(batch_size, dim_z, dis_z, device):
@@ -14,6 +16,16 @@ def sample_z(batch_size, dim_z, dis_z, device):
 
 def interpolate(a, b, t):
     return a + (b - a) * t
+
+
+def get_voxel_from_mat(path, dim_voxel):
+    voxels = io.loadmat(path)['instance']  # 30x30x30
+    voxels = np.pad(voxels, (1, 1), 'constant', constant_values=(0, 0))  # 32x32x32
+    if dim_voxel == 64:
+        voxels = nd.zoom(voxels, (2, 2, 2), mode='constant', order=0)  # 64x64x64
+    if dim_voxel == 128:
+        voxels = nd.zoom(voxels, (2, 2, 2), mode='constant', order=0)  # 128x128x128
+    return voxels
 
 
 def save_voxel(samples, save_name, num_samples=8, thresh=0.1):

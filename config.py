@@ -13,6 +13,7 @@ def get_config():
     # dataset
     parser.add_argument('--data_root', type=str, default='data')
     parser.add_argument('--dataset_name', type=str, default='fluid')
+    parser.add_argument('--dataset_type', type=str, default='raw', choices=['raw', 'shapenet'])
     parser.add_argument('--batch_size', type=int, default=32)
 
     # training

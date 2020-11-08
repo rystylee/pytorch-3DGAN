@@ -22,6 +22,7 @@ class Trainer(object):
         self.dataloader = load_dataloader(
             data_root=config.data_root,
             dataset_name=config.dataset_name,
+            dataset_type=config.dataset_type,
             batch_size=config.batch_size,
             dim_voxel=config.dim_voxel
             )
