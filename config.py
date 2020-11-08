@@ -43,6 +43,12 @@ def get_config():
     parser.add_argument('--log_interval', type=int, default=20)
     parser.add_argument('--sample_dir', type=str, default='samples')
     parser.add_argument('--sample_interval', type=int, default=100)
+    parser.add_argument('--test_dir', type=str, default='results')
+
+    # testing
+    parser.add_argument('--config_path', type=str, default='')
+    parser.add_argument('--img_dir', type=str, default='images')
+    parser.add_argument('--binary_dir', type=str, default='binaries')
 
     args = parser.parse_args()
 

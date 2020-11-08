@@ -10,14 +10,7 @@ from model import Discriminator
 from model import Generator
 from losses import GANLoss
 from data_loader import load_dataloader
-from utils import save_voxel
-
-
-def sample_z(batch_size, dim_z, dis_z, device):
-    if dis_z == 'norm':
-        return torch.Tensor(batch_size, dim_z).normal_(0, 0.33).to(device)
-    else:
-        raise NotImplementedError()
+from utils import sample_z, save_voxel
 
 
 class Trainer(object):
