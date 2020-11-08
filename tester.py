@@ -2,6 +2,7 @@ import os
 from tqdm import tqdm
 
 import torch
+from torchsummary import summary
 
 from model import Generator
 from utils import sample_z, interpolate, save_single_voxel
@@ -18,6 +19,10 @@ class Tester(object):
         self.generator = Generator(dim_z=config.dim_z, ch=config.ch_g, out_ch=1, bias=config.bias).to(self.device)
         self._load_models(config.checkpoint_path)
         self.generator.eval()
+        print('')
+        print('Generator summary')
+        summary(self.generator, (config.batch_size, self.dim_z))
+        print('')
 
     def test(self):
         src_z = sample_z(1, self.dim_z, self.dis_z, self.device)

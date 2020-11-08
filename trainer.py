@@ -5,6 +5,7 @@ from tqdm import tqdm
 import torch
 import torch.optim as optim
 from torch.utils.tensorboard import SummaryWriter
+from torchsummary import summary
 
 from model import Discriminator
 from model import Generator
@@ -32,6 +33,14 @@ class Trainer(object):
 
         self.generator = Generator(dim_z=config.dim_z, ch=config.ch_g, out_ch=1, bias=config.bias).to(self.device)
         self.discriminator = Discriminator(ch=config.ch_d, out_ch=1, bias=config.bias, dim_voxel=config.dim_voxel).to(self.device)
+        print('')
+        print('Generator summary')
+        summary(self.generator, (config.batch_size, self.dim_z))
+        print('')
+        print('')
+        print('Discriminator summary')
+        summary(self.discriminator, (config.batch_size, config.dim_voxel, config.dim_voxel, config.dim_voxel))
+        print('')
 
         self.optim_g = optim.Adam(self.generator.parameters(), lr=config.lr_g, betas=(config.beta1, config.beta2))
         self.optim_d = optim.Adam(self.discriminator.parameters(), lr=config.lr_d, betas=(config.beta1, config.beta2))
